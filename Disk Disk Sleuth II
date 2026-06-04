@@ -1,0 +1,48 @@
+🚩 picoCTF - Disk, disk, sleuth! II (Forensics)
+
+📊 Challenge Information
+
+Category: Forensics
+
+Difficulty: Easy
+
+Tools used: mmls, fls, icat (The Sleuth Kit)
+
+🕵️‍♂️ Investigation Process
+
+Method 1: The Forensic Analysis Way
+
+Decompress the image file:
+
+gunzip dds2-alpine.flag.img.gz
+
+
+Determine the partition layout:
+
+mmls dds2-alpine.flag.img
+
+
+The Linux partition containing the filesystem starts at sector 2048.
+
+Locate the flag file: We perform a recursive directory search (-r) on the partition:
+
+fls -r -o 2048 dds2-alpine.flag.img
+
+
+We look through the directory tree. In this challenge, the flag.txt file is tucked deeper inside the folders. Let's find its inode (e.g., 18290).
+
+Read the flag contents:
+
+icat -o 2048 dds2-alpine.flag.img 18290
+
+
+Method 2: Command Line Shortcut
+
+For a fast extraction, search the binary directly:
+
+strings dds2-alpine.flag.img | grep "picoCTF"
+
+
+🎯 Flag
+
+picoCTF{f113_51nd_1nd_3st33m_a14104b2} (Note: Replace with your actual flag

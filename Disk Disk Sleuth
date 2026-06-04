@@ -1,0 +1,48 @@
+🚩 picoCTF - Disk, disk, sleuth! (Forensics)
+
+📊 Challenge Information
+
+Category: Forensics
+
+Difficulty: Easy
+
+Tools used: mmls, fls, icat (The Sleuth Kit)
+
+🕵️‍♂️ Investigation Process
+
+Method 1: The Professional Forensic Way (Using Sleuth Kit)
+
+Decompress the image:
+
+gunzip dds1-alpine.flag.img.gz
+
+
+Find the partition offset: We check the partition table to locate the Linux partition start sector:
+
+mmls dds1-alpine.flag.img
+
+
+The main Linux partition starts at sector offset 2048.
+
+List files inside the partition: We use fls to recursively search for files in this partition by pointing to the offset 2048:
+
+fls -r -o 2048 dds1-alpine.flag.img
+
+
+This scan reveals a file named flag.txt with its corresponding inode number (e.g., 18281).
+
+Extract file content: Use icat with the offset and inode number to read the flag directly from the raw disk image without mounting it:
+
+icat -o 2048 dds1-alpine.flag.img 18281
+
+
+Method 2: The Quick Way (Using Strings)
+
+Since this is an unencrypted, simple challenge disk, we can also extract ASCII strings and filter for the flag:
+
+strings dds1-alpine.flag.img | grep "picoCTF"
+
+
+🎯 Flag
+
+picoCTF{f113_5y573m_4n41y515_f0r_7h3_w1n_e15264b3} (Note:

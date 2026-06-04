@@ -1,4 +1,11 @@
-## Hi there 👋
+🛠️ My Digital Forensics Toolbelt
+Here are the tools and areas I am currently exploring and practicing:
+Analysis Tools: 🔎 Autopsy
+Languages & Scripting: 🐍 Python
+CTF Categories: 🚩  Forensics
+
+📈 GitHub Stats
+Connect with me and let's explore the world of cyber forensics together!
 
 <!--
 **daonhathoang05112007-prog/daonhathoang05112007-prog** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.
